@@ -1,3 +1,3 @@
 Cooking module.
 Regular module for KTaNe.
-By: marksam32
+By: Marksam32
