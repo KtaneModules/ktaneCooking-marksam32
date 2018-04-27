@@ -1,14 +1,11 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
-using System.Linq;
 using System.Text.RegularExpressions;
+using UnityEngine;
 
 
 public class Cooking : MonoBehaviour
 {
-
     public KMAudio Audio;
     public KMBombInfo Info;
     public KMBombModule Module;
@@ -237,9 +234,9 @@ public class Cooking : MonoBehaviour
 
     private KMSelectable[] UpdateTemp(int temp)
     {
-        if (this.temp != temp && temp % 10 == 0 && temp >= 0 && temp <= 250)
+        if (temp % 10 == 0 && temp >= 0 && temp <= 250)
         {
-            var selectables = new List<KMSelectable>(); ;
+            var selectables = new List<KMSelectable>();
             var diff = temp - this.temp;
             for (int i = 0; i < Math.Abs(diff); i = i + 10)
             {
@@ -254,9 +251,9 @@ public class Cooking : MonoBehaviour
 
     private KMSelectable[] UpdateTime(int time)
     {
-        if (this.time != time && time % 5 == 0 && time >= 0 && time <= 95)
+        if (time % 5 == 0 && time >= 0 && time <= 95)
         {
-            var selectables = new List<KMSelectable>(); ;
+            var selectables = new List<KMSelectable>();
             var diff = time - this.time;
             for (int i = 0; i < Math.Abs(diff); i = i + 5)
             {
@@ -271,32 +268,32 @@ public class Cooking : MonoBehaviour
 
     private KMSelectable[] UpdateSetting(string value)
     {
-        if (("beh".Equals(value, StringComparison.InvariantCultureIgnoreCase) || "bottom element heat".Equals(value, StringComparison.InvariantCultureIgnoreCase)) && this.currentSymbol != 0)
+        if ("beh".Equals(value, StringComparison.InvariantCultureIgnoreCase) || "bottom element heat".Equals(value, StringComparison.InvariantCultureIgnoreCase))
         {
             return UpdateSetting(0);
         }
 
-        if (("behwg".Equals(value, StringComparison.InvariantCultureIgnoreCase) || "bottom element heat with grill".Equals(value, StringComparison.InvariantCultureIgnoreCase)) && this.currentSymbol != 1)
+        if ("behwg".Equals(value, StringComparison.InvariantCultureIgnoreCase) || "bottom element heat with grill".Equals(value, StringComparison.InvariantCultureIgnoreCase))
         {
             return UpdateSetting(1);
         }
 
-        if (("ch".Equals(value, StringComparison.InvariantCultureIgnoreCase) || "conventional heating".Equals(value, StringComparison.InvariantCultureIgnoreCase)) && this.currentSymbol != 2)
+        if ("ch".Equals(value, StringComparison.InvariantCultureIgnoreCase) || "conventional heating".Equals(value, StringComparison.InvariantCultureIgnoreCase))
         {
             return UpdateSetting(2);
         }
 
-        if (("fo".Equals(value, StringComparison.InvariantCultureIgnoreCase) || "fan oven".Equals(value, StringComparison.InvariantCultureIgnoreCase)) && this.currentSymbol != 3)
+        if ("fo".Equals(value, StringComparison.InvariantCultureIgnoreCase) || "fan oven".Equals(value, StringComparison.InvariantCultureIgnoreCase))
         {
             return UpdateSetting(3);
         }
 
-        if (("g".Equals(value, StringComparison.InvariantCultureIgnoreCase) || "grill".Equals(value, StringComparison.InvariantCultureIgnoreCase)) && this.currentSymbol != 4)
+        if ("g".Equals(value, StringComparison.InvariantCultureIgnoreCase) || "grill".Equals(value, StringComparison.InvariantCultureIgnoreCase))
         {
             return UpdateSetting(4);
         }
 
-        if (("fwg".Equals(value, StringComparison.InvariantCultureIgnoreCase) || "fan with grill".Equals(value, StringComparison.InvariantCultureIgnoreCase)) && this.currentSymbol != 5)
+        if ("fwg".Equals(value, StringComparison.InvariantCultureIgnoreCase) || "fan with grill".Equals(value, StringComparison.InvariantCultureIgnoreCase))
         {
             return UpdateSetting(5);
         }
@@ -309,7 +306,7 @@ public class Cooking : MonoBehaviour
 
     private KMSelectable[] UpdateSetting(int newSymbol)
     {
-        var selectables = new List<KMSelectable>(); ;
+        var selectables = new List<KMSelectable>();
         var diff = newSymbol - this.currentSymbol;
         for (int i = 0; i < Math.Abs(diff); ++i)
         {
@@ -318,9 +315,4 @@ public class Cooking : MonoBehaviour
 
         return selectables.ToArray();
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }
