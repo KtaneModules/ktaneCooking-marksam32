@@ -243,6 +243,9 @@ public class Cooking : MonoBehaviour
                 selectables.Add(diff > 0 ? DegreeBtns[1] : DegreeBtns[0]);
             }
 
+	        if (selectables.Count == 0)
+		        selectables.Add(null);
+
             return selectables.ToArray();
         }
 
@@ -260,7 +263,10 @@ public class Cooking : MonoBehaviour
                 selectables.Add(diff > 0 ? TimeBtns[1] : TimeBtns[0]);
             }
 
-            return selectables.ToArray();
+	        if (selectables.Count == 0)
+		        selectables.Add(null);
+
+			return selectables.ToArray();
         }
 
         return null;
@@ -313,6 +319,9 @@ public class Cooking : MonoBehaviour
             selectables.Add(diff > 0 ? TypeBtns[1] : TypeBtns[0]);
         }
 
-        return selectables.ToArray();
+	    if (selectables.Count == 0)
+		    selectables.Add(null);
+
+		return selectables.ToArray();
     }
 }
