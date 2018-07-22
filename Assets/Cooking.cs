@@ -58,12 +58,8 @@ public class Cooking : MonoBehaviour
             this.isSolved = false;
         }
     }
-
-    // Use this for initialization
-    void Start ()
+    void Activate()
     {
-
-        _moduleId = _moduleIdCounter++;
         currentSymbol = UnityEngine.Random.Range(0, 6);
         Symbol.material.mainTexture = TypeSymbols[currentSymbol];
         ovenStartSymbol = 0;
@@ -81,7 +77,7 @@ public class Cooking : MonoBehaviour
             if (this.isSolved == true)
             {
                 return false;
-            }       
+            }
             currentSymbol = (currentSymbol - 1 < 0) ? 5 : currentSymbol - 1;
             Symbol.material.mainTexture = TypeSymbols[currentSymbol];
             return false;
@@ -187,12 +183,17 @@ public class Cooking : MonoBehaviour
             {
                 return false;
             }
-            Audio.PlaySoundAtTransform("ButtonSound", this.TimeBtns[1].transform);
-            CookBtn.AddInteractionPunch();
             this.HandlePass();
             return false;
         };
 
+    }
+    // Use this for initialization
+    void Start ()
+    {
+        _moduleId = _moduleIdCounter++;
+        Module.OnActivate += Activate;
+       
     }
     //Twitch plays:
     KMSelectable[] ProcessTwitchCommand(string command)
