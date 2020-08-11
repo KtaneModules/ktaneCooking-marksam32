@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -196,7 +198,7 @@ public class Cooking : MonoBehaviour
        
     }
     //Twitch plays:
-    KMSelectable[] ProcessTwitchCommand(string command)
+    public KMSelectable[] ProcessTwitchCommand(string command)
     {
         command = command.ToLowerInvariant().Trim();
 
@@ -324,5 +326,62 @@ public class Cooking : MonoBehaviour
 		    selectables.Add(null);
 
 		return selectables.ToArray();
+    }
+
+    public IEnumerator TwitchHandleForcedSolve()
+    {
+        if (cookingHelper.ShouldLightBeTurnedOn)
+        {
+            if (ovenStartSymbol == 0)
+            {
+                LightBtn.OnInteract();
+                yield return new WaitForSeconds(.1f);
+            }
+        }
+        else
+        {
+            if (ovenStartSymbol == 1)
+            {
+                LightBtn.OnInteract();
+                yield return new WaitForSeconds(.1f);
+            }
+        }
+
+        var correctTemp = cookingHelper.MealToTemp(cookingHelper.GetMeal());
+        var correctTime = cookingHelper.GetCookingTime();
+        var setting = cookingHelper.GetOvenSetting();
+
+        while (temp < correctTemp)
+        {
+            DegreeBtns[1].OnInteract();
+            yield return new WaitForSeconds(.1f);
+        }
+        
+        while (temp > correctTemp)
+        {
+            DegreeBtns[0].OnInteract();
+            yield return new WaitForSeconds(.1f);
+        }
+        
+        while (time < correctTime)
+        {
+            TimeBtns[1].OnInteract();
+            yield return new WaitForSeconds(.1f);
+        }
+        
+        while (time > correctTime)
+        {
+            TimeBtns[0].OnInteract();
+            yield return new WaitForSeconds(.1f);
+        }
+        
+        while ((OvenSetting)(currentSymbol + 1) != setting)
+        {
+            TypeBtns[1].OnInteract();
+            yield return new WaitForSeconds(.1f);
+        }
+
+        CookBtn.OnInteract();
+        yield return true;
     }
 }

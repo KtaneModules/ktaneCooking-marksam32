@@ -13,4 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WorkshopPublishedFileID: 1360105608
   Title: Cooking
-  Tags: []
+  Tags:
+  - Regular Module

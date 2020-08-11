@@ -36,7 +36,7 @@ public class CookingHelper
         Debug.LogFormat("[Cooking #{0}] - Lamp: {1}", this.moduleId, this.ShouldLightBeTurnedOn);
     }
 
-    private static int GetCookingTime(Meal meal, Person person)
+    private int GetCookingTime(Meal meal, Person person)
     {
         return MinutesMatrix[(int)meal - 1, (int)person - 1];
     }
@@ -85,7 +85,7 @@ public class CookingHelper
         }
     }
 
-    public static int MealToTemp(Meal meal)
+    public int MealToTemp(Meal meal)
     {
         switch (meal)
         {
