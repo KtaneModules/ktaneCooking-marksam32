@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
 using System.Text.RegularExpressions;
 using UnityEngine;
-
 
 public class Cooking : MonoBehaviour
 {
@@ -28,7 +26,7 @@ public class Cooking : MonoBehaviour
 
     private static int _moduleIdCounter = 1;
     private int _moduleId;
-    private bool isSolved = false;
+    private bool isSolved;
 
     private int currentSymbol;
     private int ovenStartSymbol;
@@ -76,7 +74,7 @@ public class Cooking : MonoBehaviour
         {
             TypeBtns[0].AddInteractionPunch();
             Audio.PlaySoundAtTransform("ButtonSound", this.TypeBtns[0].transform);
-            if (this.isSolved == true)
+            if (this.isSolved)
             {
                 return false;
             }
@@ -88,7 +86,7 @@ public class Cooking : MonoBehaviour
         {
             TypeBtns[1].AddInteractionPunch();
             Audio.PlaySoundAtTransform("ButtonSound", this.TypeBtns[1].transform);
-            if (this.isSolved == true)
+            if (this.isSolved)
             {
                 return false;
             }
@@ -100,7 +98,7 @@ public class Cooking : MonoBehaviour
         {
             LightBtn.AddInteractionPunch();
             Audio.PlaySoundAtTransform("ButtonSound", this.LightBtn.transform);
-            if (this.isSolved == true)
+            if (this.isSolved)
             {
                 return false;
             }
@@ -121,7 +119,7 @@ public class Cooking : MonoBehaviour
         {
             DegreeBtns[0].AddInteractionPunch();
             Audio.PlaySoundAtTransform("ButtonSound", this.DegreeBtns[0].transform);
-            if (this.isSolved == true)
+            if (this.isSolved)
             {
                 return false;
             }
@@ -136,7 +134,7 @@ public class Cooking : MonoBehaviour
         {
             DegreeBtns[1].AddInteractionPunch();
             Audio.PlaySoundAtTransform("ButtonSound", this.DegreeBtns[1].transform);
-            if (this.isSolved == true)
+            if (this.isSolved)
             {
                 return false;
             }
@@ -151,7 +149,7 @@ public class Cooking : MonoBehaviour
         {
             TimeBtns[0].AddInteractionPunch();
             Audio.PlaySoundAtTransform("ButtonSound", this.TimeBtns[0].transform);
-            if (this.isSolved == true)
+            if (this.isSolved)
             {
                 return false;
             }
@@ -166,7 +164,7 @@ public class Cooking : MonoBehaviour
         {
             TimeBtns[1].AddInteractionPunch();
             Audio.PlaySoundAtTransform("ButtonSound", this.TimeBtns[1].transform);
-            if (this.isSolved == true)
+            if (this.isSolved)
             {
                 return false;
             }
@@ -177,11 +175,11 @@ public class Cooking : MonoBehaviour
             }
             return false;
         };
-        CookBtn.OnInteract += delegate ()
+        CookBtn.OnInteract += delegate
         {
             CookBtn.AddInteractionPunch();
             Audio.PlaySoundAtTransform("ButtonSound", this.CookBtn.transform);
-            if (this.isSolved == true)
+            if (this.isSolved)
             {
                 return false;
             }
@@ -235,12 +233,12 @@ public class Cooking : MonoBehaviour
         return null;
     }
 
-    private KMSelectable[] UpdateTemp(int temp)
+    private KMSelectable[] UpdateTemp(int temperature)
     {
-        if (temp % 10 == 0 && temp >= 0 && temp <= 250)
+        if (temperature % 10 == 0 && temperature >= 0 && temperature <= 250)
         {
             var selectables = new List<KMSelectable>();
-            var diff = temp - this.temp;
+            var diff = temperature - this.temp;
             for (int i = 0; i < Math.Abs(diff); i = i + 10)
             {
                 selectables.Add(diff > 0 ? DegreeBtns[1] : DegreeBtns[0]);
@@ -255,12 +253,12 @@ public class Cooking : MonoBehaviour
         return null;
     }
 
-    private KMSelectable[] UpdateTime(int time)
+    private KMSelectable[] UpdateTime(int t)
     {
-        if (time % 5 == 0 && time >= 0 && time <= 95)
+        if (t % 5 == 0 && t >= 0 && t <= 95)
         {
             var selectables = new List<KMSelectable>();
-            var diff = time - this.time;
+            var diff = t - this.time;
             for (int i = 0; i < Math.Abs(diff); i = i + 5)
             {
                 selectables.Add(diff > 0 ? TimeBtns[1] : TimeBtns[0]);

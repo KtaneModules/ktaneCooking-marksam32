@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class CookingHelper
 {
-    private static int[,] MinutesMatrix = {
+    private static readonly int[,] MinutesMatrix = {
        { 10, 15, 20, 5, 30, 50 },
        { 75, 70, 80, 75, 65, 10},
        { 55, 70, 65, 50, 45, 60},
@@ -14,8 +12,8 @@ public class CookingHelper
        { 25, 30, 35, 20, 40, 10}
     };
 
-    private KMBombInfo kmBombInfo;
-    private int moduleId;
+    private readonly KMBombInfo kmBombInfo;
+    private readonly int moduleId;
 
     public CookingHelper(int moduleId, KMBombInfo kmBombInfo)
     {
@@ -135,7 +133,7 @@ public class CookingHelper
         }
     }
 
-    public Person GetCookFor()
+    private Person GetCookFor()
     {
         if (this.CookForHarry)
         {
@@ -192,7 +190,7 @@ public class CookingHelper
         }
     }
 
-    public bool HasEmptyPortPlate
+    private bool HasEmptyPortPlate
     {
         get
         {
